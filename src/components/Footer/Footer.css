@@ -1,0 +1,10 @@
+footer {
+    height: 6vh;
+    font-size: 1.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2C3333;
+    color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

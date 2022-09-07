@@ -1,0 +1,19 @@
+.container {
+    height: 87vh;
+    background-color: #E7F6F2;
+    position: relative;
+}
+.container .calculate-container {
+    position: absolute;
+    left: 1.5%;
+    top: 1.5%;
+    height: 97%;
+    width: 97%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-radius: 10px;
+}
+.container .calculate-container .container-items .calculate-header {
+    padding: 15px;
+    font-size: 24px;
+    border-bottom: 2px solid black;
+}
