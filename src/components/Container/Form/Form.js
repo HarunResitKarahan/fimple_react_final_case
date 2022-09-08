@@ -5,7 +5,7 @@ import "./Form.css"
 function Form() {
     const formik = useFormik({
         initialValues: {
-            firstName: '',
+            creditAmount: 0,
             lastName: '',
             email: '',
         },
@@ -15,19 +15,21 @@ function Form() {
     });
     return (
         <>
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} autocomplete="off">
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="firstName">Kredi Tutarı: </label>
+                        <label htmlFor="credit-amount">Kredi Tutarı: </label>
                     </div>
                     <div className='input'>
                         <input
-                            id="firstName"
-                            name="firstName"
-                            type="text"
+                            id="credit-amount"
+                            type="number"
                             onChange={formik.handleChange}
-                            value={formik.values.firstName}
+                            placeholder={formik.values.creditAmount}
+                            // value={formik.values.creditAmount}
+                            autocomplete="nope"
                         />
+                        <span style={{ position: "absolute", color: '#818181', right: '12px' }}>₺</span>
                     </div>
                 </div>
                 <div className='form-items'>
@@ -37,10 +39,10 @@ function Form() {
                     <div className='input'>
                         <input
                             id="lastName"
-                            name="lastName"
                             type="text"
                             onChange={formik.handleChange}
                             value={formik.values.lastName}
+                            autocomplete="off"
                         />
                     </div>
                 </div>
@@ -51,10 +53,10 @@ function Form() {
                     <div className='input'>
                         <input
                             id="email"
-                            name="email"
                             type="email"
                             onChange={formik.handleChange}
                             value={formik.values.email}
+                            autocomplete="off"
                         />
                     </div>
                 </div>
@@ -65,10 +67,10 @@ function Form() {
                     <div className='input'>
                         <input
                             id="email"
-                            name="email"
                             type="email"
                             onChange={formik.handleChange}
                             value={formik.values.email}
+                            autocomplete="off"
                         />
                     </div>
                 </div>
@@ -79,14 +81,14 @@ function Form() {
                     <div className='input'>
                         <input
                             id="email"
-                            name="email"
                             type="email"
                             onChange={formik.handleChange}
                             value={formik.values.email}
+                            autocomplete="off"
                         />
                     </div>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit">Hesapla</button>
             </form>
         </>
     )

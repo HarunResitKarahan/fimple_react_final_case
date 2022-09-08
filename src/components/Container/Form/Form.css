@@ -5,6 +5,19 @@ form {
     /* justify-content: space-between; */
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+} */
+
 form .form-items {
     display: flex;
     flex-direction: column;
@@ -20,6 +33,11 @@ form .form-items .label {
 
 form .form-items .input {
     width: 100%;
+    position: relative;
+}
+
+form .form-items .input span {
+    top: calc(50% - 10px);
 }
 
 form label {
@@ -28,10 +46,26 @@ form label {
 }
 
 input {
-    width: calc(100% - 15px);
+    width: 100%;
     padding: 12px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
     color: rgba(0, 0, 0, 0.747);
     border: 0px solid rgba(143, 145, 156, 0.774);
     border-radius: 2px;
+    user-select: none;
+}
+
+button {
+    cursor: pointer;
+    color: white;
+    background-color: #f77c34;
+    margin-top: 15px;
+    font-size: 18px;
+    padding: 15px;
+    border: 0px;
+}
+
+button:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
