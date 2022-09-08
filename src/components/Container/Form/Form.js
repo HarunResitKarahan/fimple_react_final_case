@@ -6,8 +6,10 @@ function Form() {
     const formik = useFormik({
         initialValues: {
             creditAmount: 0,
-            lastName: '',
-            email: '',
+            installmentCount: 1,
+            interestRate: 0,
+            payment: '',
+            tax: 0,
         },
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
@@ -34,58 +36,62 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="lastName">Taksit Sayısı</label>
+                        <label htmlFor="installment-count">Taksit Sayısı</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="lastName"
-                            type="text"
+                            id="installment-count"
+                            type="number"
                             onChange={formik.handleChange}
-                            value={formik.values.lastName}
+                            placeholder={formik.values.installmentCount}
                             autocomplete="off"
                         />
                     </div>
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="email">Kâr oranı</label>
+                        <label htmlFor="interest-rate">Kâr oranı</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="email"
-                            type="email"
+                            id="interest-rate"
+                            type="number"
                             onChange={formik.handleChange}
-                            value={formik.values.email}
+                            placeholder={formik.values.interestRate}
                             autocomplete="off"
                         />
+                        <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
                     </div>
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="email">Taksit aralığı seçimi → aylık, haftalık, yıllık</label>
+                        <label htmlFor="payment">Taksit aralığı</label>
                     </div>
                     <div className='input'>
-                        <input
-                            id="email"
-                            type="email"
+                        <select
+                            id="payment"
                             onChange={formik.handleChange}
-                            value={formik.values.email}
-                            autocomplete="off"
-                        />
+                        >
+                            <option value="select" selected disabled hidden>Seçiniz</option>
+                            <option value="weekly">Haftalık</option>
+                            <option value="monthly">Aylık</option>
+                            <option value="yearly">Yıllık</option>
+                        </select>
                     </div>
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="email">Vergi oranı → bsmv ve kkdf</label>
+                        <label htmlFor="tax">Vergi oranı → bsmv ve kkdf</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="email"
-                            type="email"
+                            id="tax"
+                            type="number"
                             onChange={formik.handleChange}
-                            value={formik.values.email}
+                            placeholder={formik.values.tax}
                             autocomplete="off"
                         />
+                        <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
                     </div>
                 </div>
                 <button type="submit">Hesapla</button>
