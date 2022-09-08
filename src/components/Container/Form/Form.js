@@ -9,7 +9,8 @@ function Form() {
             installmentCount: 1,
             interestRate: 0,
             payment: '',
-            tax: 0,
+            taxBsmv: 0,
+            taxKkdf: 0,
         },
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
@@ -81,14 +82,29 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="tax">Vergi oranı → bsmv ve kkdf</label>
+                        <label htmlFor="taxBsmv">Vergi oranı (Bsmv)</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="tax"
+                            id="taxBsmv"
                             type="number"
                             onChange={formik.handleChange}
-                            placeholder={formik.values.tax}
+                            placeholder={formik.values.taxBsmv}
+                            autocomplete="off"
+                        />
+                        <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
+                    </div>
+                </div>
+                <div className='form-items'>
+                    <div className='label'>
+                        <label htmlFor="taxKkdf">Vergi oranı (Kkdf)</label>
+                    </div>
+                    <div className='input'>
+                        <input
+                            id="taxKkdf"
+                            type="number"
+                            onChange={formik.handleChange}
+                            placeholder={formik.values.taxKkdf}
                             autocomplete="off"
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
