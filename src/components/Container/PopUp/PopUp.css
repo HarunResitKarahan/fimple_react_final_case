@@ -7,3 +7,14 @@
     cursor: pointer;
     text-align: right;
 }
+
+/* .popUp .popUpContainer {
+
+} */
+.popUp .popUpContainer .containerHeader {
+    border-bottom: 3px solid black;
+}
+
+.popUp .popUpContainer .containerHeader h1 {
+    margin-bottom: 15px;
+}

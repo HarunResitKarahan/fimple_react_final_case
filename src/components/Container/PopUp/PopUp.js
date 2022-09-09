@@ -21,6 +21,11 @@ function PopUp() {
                     </div>
                 </IconContext.Provider>
             </span>
+            <div className='popUpContainer'>
+                <div className='containerHeader'>
+                    <h1>Geri Ödeme Planı Tablosu</h1>
+                </div>
+            </div>
             {JSON.stringify(formValues, null, 2)}
         </div>
     )
