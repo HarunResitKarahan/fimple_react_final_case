@@ -26,8 +26,8 @@ function Container() {
         </div>
       </div>
       <div className='popUp'
-        style={showPopUp ? { position: "absolute", transition: "all 0.7s ease", left: "0" }
-          : { position: "absolute", left: "-9999px", transition: "all 0.5s ease" }
+        style={showPopUp ? { display: "flex", width: "100%", height: "100%", backgroundColor: "#fff", position: "absolute", transition: "all 0.7s ease", left: "0", top: "0" }
+          : { display: "flex", width: "100%", height: "100%", backgroundColor: "#fff", position: "absolute", left: "-9999px", top: "0", transition: "all 1.5s ease" }
         }>
         <PopUp />
       </div>

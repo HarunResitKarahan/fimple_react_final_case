@@ -2,8 +2,9 @@
     /* min-height: 87vh;
     max-height: 87vh; */
     height: 100vh;
+    max-height: 100vh;
     background-color: #d8d8d8;
-    /* position: relative; */
+    position: relative;
 }
 
 .container .calculate-container {
