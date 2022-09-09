@@ -7,8 +7,7 @@ import { IconContext } from "react-icons";
 import PopUpContext from "../../context/PopUpContext"
 
 function Container() {
-  const showPopUp = useContext(PopUpContext)
-  console.log(showPopUp)
+  const { showPopUp, setShowPupUp } = useContext(PopUpContext)
   return (
     <div className='container'>
       <div className='calculate-container'>
@@ -26,9 +25,13 @@ function Container() {
           </div>
         </div>
       </div>
-      <div className='popUp'>
-        <PopUp />
-      </div>
+      {showPopUp ?
+        <div className='popUp'>
+          <PopUp />
+        </div>
+        :
+        <></>
+      }
     </div>
   )
 }
