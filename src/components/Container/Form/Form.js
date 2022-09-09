@@ -1,10 +1,12 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useFormik } from 'formik';
 import "./Form.css"
 import PopUpContext from "../../../context/PopUpContext"
+import FormContext from '../../../context/FormContext'
 
 function Form() {
-    const { _, setShowPupUp } = useContext(PopUpContext)
+    const { setShowPupUp } = useContext(PopUpContext)
+    const { setFormValues } = useContext(FormContext)
     const formik = useFormik({
         initialValues: {
             creditAmount: 0,
@@ -16,7 +18,8 @@ function Form() {
         },
         onSubmit: values => {
             setShowPupUp(true)
-            alert(JSON.stringify(values, null, 2));
+            // setFormValues(JSON.stringify(values, null, 2))
+            setFormValues(values)
         },
     });
     return (
