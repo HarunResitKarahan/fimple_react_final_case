@@ -4,10 +4,9 @@ const PopUpContext = createContext()
 
 export const PupUpProvider = ({ children }) => {
     const [showPopUp, setShowPupUp] = useState(false)
-
     const values = {
         showPopUp,
-        setShowPupUp
+        setShowPupUp,
     }
 
     return (
@@ -15,4 +14,4 @@ export const PupUpProvider = ({ children }) => {
     )
 }
 
-export default pupUpContext
+export default PopUpContext

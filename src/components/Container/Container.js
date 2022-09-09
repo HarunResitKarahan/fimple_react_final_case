@@ -1,11 +1,14 @@
-import React from 'react'
+import { useContext } from 'react'
 import "./Container.css"
 import Form from './Form/Form'
 import PopUp from './PopUp/PopUp'
 import { HiOutlineCash } from 'react-icons/hi'
 import { IconContext } from "react-icons";
+import PopUpContext from "../../context/PopUpContext"
 
 function Container() {
+  const showPopUp = useContext(PopUpContext)
+  console.log(showPopUp)
   return (
     <div className='container'>
       <div className='calculate-container'>
