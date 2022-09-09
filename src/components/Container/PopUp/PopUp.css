@@ -24,7 +24,18 @@
     margin-bottom: 15px;
 }
 
-.popUp .popUpContainer .popUpContainer {
-    display: flex;
-    justify-content: center;
+.popUp .popUpContainer .popUpTable table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.popUp .popUpContainer .popUpTable table tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+.popUp .popUpContainer .popUpTable table td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
