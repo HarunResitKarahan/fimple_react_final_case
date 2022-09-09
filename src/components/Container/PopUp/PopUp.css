@@ -36,18 +36,19 @@
 
 .popUp .popUpContainer .popUpTable table td,
 th {
-    border: 1px solid #dddddd;
+    /* border: 1px solid #dddddd; */
     text-align: left;
     padding: 12px;
     text-align: center;
     font-size: 14px;
 }
 
-/* .popUp .popUpContainer .popUpTable table th {
-    text-align: center;
-    font-size: 14px;
+.popUp .popUpContainer .popUpTable table th {
+    border-bottom: 1px solid #dddddd;
+    font-size: 15px;
 }
 
+/*
 .popUp .popUpContainer .popUpTable table td {
     text-align: center;
     font-size: 14px;
