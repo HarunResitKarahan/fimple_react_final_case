@@ -8,13 +8,18 @@
     text-align: right;
 }
 
+/* .popUp .popUpExit div svg {
+    color: #f77c34;
+} */
+
 /* .popUp .popUpContainer {
 
 } */
 .popUp .popUpContainer .containerHeader {
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #f77c348a;
 }
 
 .popUp .popUpContainer .containerHeader h1 {
+    color: rgba(0, 0, 0, 0.664);
     margin-bottom: 15px;
 }
