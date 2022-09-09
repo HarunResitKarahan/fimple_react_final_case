@@ -25,13 +25,12 @@ function Container() {
           </div>
         </div>
       </div>
-      {showPopUp ?
-        <div className='popUp'>
-          <PopUp />
-        </div>
-        :
-        <></>
-      }
+      <div className='popUp'
+        style={showPopUp ? { position: "absolute", transition: "all 0.7s ease", left: "0" }
+          : { position: "absolute", left: "-9999px", transition: "all 0.5s ease" }
+        }>
+        <PopUp />
+      </div>
     </div>
   )
 }
