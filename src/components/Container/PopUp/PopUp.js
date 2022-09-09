@@ -10,7 +10,6 @@ function PopUp() {
     const { setShowPupUp } = useContext(PopUpContext)
     const headers = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
     const Rate = (formValues.interestRate / 100) + (formValues.taxBsmv / 100) + (formValues.taxKkdf / 100)
-    console.log(Rate)
     const Nper = formValues.installmentCount
     const Pv = formValues.creditAmount
     const payment = Pv * ((Rate * ((1 + Rate) ** Nper)) / ((((1 + Rate) ** Nper) - 1)))
@@ -45,12 +44,12 @@ function PopUp() {
                             {[...Array(formValues.installmentCount)].map((x, i) =>
                                 <tr key={i}>
                                     <td>{i + 1}</td>
-                                    <td>{payment.toFixed(2)} ₺</td>
+                                    <td>{Number(payment.toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{formValues.interestRate} ₺</td>
                                     <td>{formValues.payment} ₺</td>
                                     <td>{formValues.taxBsmv} ₺</td>
-                                    <td>{formValues.taxKkdf} ₺</td>
-                                    <td>{formValues.taxKkdf} ₺</td>
+                                    <td>{Number((formValues.taxKkdf * 1000).toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
+                                    <td>{Number((formValues.taxBsmv * 1000).toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                 </tr>
                             )}
                         </tbody>
