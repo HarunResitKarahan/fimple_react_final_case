@@ -9,7 +9,7 @@ function PopUp() {
     const { formValues } = useContext(FormContext)
     const { setShowPupUp } = useContext(PopUpContext)
     const headers = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
-    const Rate = (formValues.interestRate / 100) + (formValues.taxBsmv / 100) + (formValues.taxKkdf)
+    const Rate = (formValues.interestRate / 100) + (formValues.taxBsmv / 100) + (formValues.taxKkdf / 100)
     console.log(Rate)
     const Nper = formValues.installmentCount
     const Pv = formValues.creditAmount
