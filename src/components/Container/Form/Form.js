@@ -33,7 +33,7 @@ function Form() {
                         <input
                             id="creditAmount"
                             type="number"
-                            min="1"
+                            min={1}
                             onChange={formik.handleChange}
                             placeholder={formik.values.creditAmount}
                             // value={formik.values.creditAmount}
@@ -51,6 +51,7 @@ function Form() {
                         <input
                             id="installmentCount"
                             type="number"
+                            min={1}
                             onChange={formik.handleChange}
                             placeholder={formik.values.installmentCount}
                             autocomplete="off"
@@ -66,6 +67,7 @@ function Form() {
                         <input
                             id="interestRate"
                             type="number"
+                            min={0}
                             onChange={formik.handleChange}
                             placeholder={formik.values.interestRate}
                             autocomplete="off"
@@ -99,6 +101,7 @@ function Form() {
                         <input
                             id="taxBsmv"
                             type="number"
+                            min={0}
                             onChange={formik.handleChange}
                             placeholder={formik.values.taxBsmv}
                             autocomplete="off"
@@ -115,6 +118,7 @@ function Form() {
                         <input
                             id="taxKkdf"
                             type="number"
+                            min={0}
                             onChange={formik.handleChange}
                             placeholder={formik.values.taxKkdf}
                             autocomplete="off"
