@@ -9,6 +9,11 @@ function PopUp() {
     const { formValues } = useContext(FormContext)
     const { setShowPupUp } = useContext(PopUpContext)
     const headers = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
+    const Rate = (formValues.interestRate / 100) + (formValues.taxBsmv / 100) + (formValues.taxKkdf)
+    console.log(Rate)
+    const Nper = formValues.installmentCount
+    const Pv = formValues.creditAmount
+    const payment = Pv * ((Rate * ((1 + Rate) ** Nper)) / ((((1 + Rate) ** Nper) - 1)))
     // console.log(formValues)
     // useEffect(() => {
     //     console.log(formValues)
@@ -28,28 +33,32 @@ function PopUp() {
                 </div>
                 <div className='popUpTable'>
                     <table>
-                        <tr>
-                            {headers.map((item, index) => (
-                                <th key={index}>{item}</th>
-                            ))}
-                        </tr>
-                        <tr>
+                        <thead>
+                            <tr>
+                                {headers.map((item, index) => (
+                                    <th key={index}>{item}</th>
+                                ))}
+                            </tr>
+                        </thead>
+
+                        <tbody>
                             {[...Array(formValues.installmentCount)].map((x, i) =>
-                                <>
+                                <tr key={i}>
                                     <td>{i + 1}</td>
-                                    <td>{formValues.creditAmount}₺</td>
-                                    <td>{formValues.interestRate}₺</td>
-                                    <td>{formValues.payment}₺</td>
-                                    <td>{formValues.taxBsmv}₺</td>
-                                    <td>{formValues.taxKkdf}₺</td>
-                                    <td>{formValues.taxKkdf}₺</td>
-                                </>
+                                    <td>{payment.toFixed(2)} ₺</td>
+                                    <td>{formValues.interestRate} ₺</td>
+                                    <td>{formValues.payment} ₺</td>
+                                    <td>{formValues.taxBsmv} ₺</td>
+                                    <td>{formValues.taxKkdf} ₺</td>
+                                    <td>{formValues.taxKkdf} ₺</td>
+                                </tr>
                             )}
-                        </tr>
+                        </tbody>
+
                     </table>
                 </div>
             </div>
-            {/* {JSON.stringify(formValues, null, 2)} */}
+            {JSON.stringify(formValues, null, 2)}
         </div>
     )
 }

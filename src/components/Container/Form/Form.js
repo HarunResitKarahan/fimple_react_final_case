@@ -24,7 +24,7 @@ function Form() {
     });
     return (
         <>
-            <form onSubmit={formik.handleSubmit} autocomplete="off">
+            <form onSubmit={formik.handleSubmit} autoComplete="off">
                 <div className='form-items'>
                     <div className='label'>
                         <label htmlFor="creditAmount">Kredi Tutarı: </label>
@@ -37,7 +37,7 @@ function Form() {
                             onChange={formik.handleChange}
                             placeholder={0}
                             // value={formik.values.creditAmount}
-                            autocomplete="nope"
+                            autoComplete="nope"
                             required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>₺</span>
@@ -54,7 +54,7 @@ function Form() {
                             min={1}
                             onChange={formik.handleChange}
                             placeholder={1}
-                            autocomplete="off"
+                            autoComplete="off"
                             required
                         />
                     </div>
@@ -68,9 +68,10 @@ function Form() {
                             id="interestRate"
                             type="number"
                             min={0}
+                            step={0.0001}
                             onChange={formik.handleChange}
                             placeholder={0}
-                            autocomplete="off"
+                            autoComplete="off"
                             required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
@@ -84,9 +85,10 @@ function Form() {
                         <select
                             id="payment"
                             onChange={formik.handleChange}
+                            defaultValue={""}
                             required
                         >
-                            <option label="Seçiniz" value="" selected disabled hidden>Seçiniz</option>
+                            <option label="Seçiniz" value="" disabled hidden>Seçiniz</option>
                             <option value="Haftalık">Haftalık</option>
                             <option value="Aylık">Aylık</option>
                             <option value="Yıllık">Yıllık</option>
@@ -102,9 +104,10 @@ function Form() {
                             id="taxBsmv"
                             type="number"
                             min={0}
+                            step={0.0001}
                             onChange={formik.handleChange}
                             placeholder={0}
-                            autocomplete="off"
+                            autoComplete="off"
                             required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
@@ -119,9 +122,10 @@ function Form() {
                             id="taxKkdf"
                             type="number"
                             min={0}
+                            step={0.0001}
                             onChange={formik.handleChange}
                             placeholder={0}
-                            autocomplete="off"
+                            autoComplete="off"
                             required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
