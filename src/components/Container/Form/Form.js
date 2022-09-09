@@ -35,7 +35,7 @@ function Form() {
                             type="number"
                             min={1}
                             onChange={formik.handleChange}
-                            placeholder={formik.values.creditAmount}
+                            placeholder={0}
                             // value={formik.values.creditAmount}
                             autocomplete="nope"
                             required
@@ -53,7 +53,7 @@ function Form() {
                             type="number"
                             min={1}
                             onChange={formik.handleChange}
-                            placeholder={formik.values.installmentCount}
+                            placeholder={1}
                             autocomplete="off"
                             required
                         />
@@ -69,7 +69,7 @@ function Form() {
                             type="number"
                             min={0}
                             onChange={formik.handleChange}
-                            placeholder={formik.values.interestRate}
+                            placeholder={0}
                             autocomplete="off"
                             required
                         />
@@ -87,9 +87,9 @@ function Form() {
                             required
                         >
                             <option label="Seçiniz" value="" selected disabled hidden>Seçiniz</option>
-                            <option value="weekly">Haftalık</option>
-                            <option value="monthly">Aylık</option>
-                            <option value="yearly">Yıllık</option>
+                            <option value="Haftalık">Haftalık</option>
+                            <option value="Aylık">Aylık</option>
+                            <option value="Yıllık">Yıllık</option>
                         </select>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ function Form() {
                             type="number"
                             min={0}
                             onChange={formik.handleChange}
-                            placeholder={formik.values.taxBsmv}
+                            placeholder={0}
                             autocomplete="off"
                             required
                         />
@@ -120,7 +120,7 @@ function Form() {
                             type="number"
                             min={0}
                             onChange={formik.handleChange}
-                            placeholder={formik.values.taxKkdf}
+                            placeholder={0}
                             autocomplete="off"
                             required
                         />

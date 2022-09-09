@@ -24,7 +24,7 @@ function PopUp() {
             </span>
             <div className='popUpContainer'>
                 <div className='containerHeader'>
-                    <h1>Geri Ödeme Planı Tablosu</h1>
+                    <h1>{formValues.payment} Geri Ödeme Planı Tablosu</h1>
                 </div>
                 <div className='popUpTable'>
                     <table>
@@ -37,18 +37,19 @@ function PopUp() {
                             {[...Array(formValues.installmentCount)].map((x, i) =>
                                 <>
                                     <td>{i + 1}</td>
-                                    <td>{formValues.creditAmount}</td>
-                                    <td>{formValues.interestRate}</td>
-                                    <td>{formValues.payment}</td>
-                                    <td>{formValues.taxBsmv}</td>
-                                    <td>{formValues.taxKkdf}</td>
+                                    <td>{formValues.creditAmount}₺</td>
+                                    <td>{formValues.interestRate}₺</td>
+                                    <td>{formValues.payment}₺</td>
+                                    <td>{formValues.taxBsmv}₺</td>
+                                    <td>{formValues.taxKkdf}₺</td>
+                                    <td>{formValues.taxKkdf}₺</td>
                                 </>
                             )}
                         </tr>
                     </table>
                 </div>
             </div>
-            {JSON.stringify(formValues, null, 2)}
+            {/* {JSON.stringify(formValues, null, 2)} */}
         </div>
     )
 }
