@@ -33,10 +33,12 @@ function Form() {
                         <input
                             id="credit-amount"
                             type="number"
+                            min="1"
                             onChange={formik.handleChange}
                             placeholder={formik.values.creditAmount}
                             // value={formik.values.creditAmount}
                             autocomplete="nope"
+                            required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>₺</span>
                     </div>
@@ -52,6 +54,7 @@ function Form() {
                             onChange={formik.handleChange}
                             placeholder={formik.values.installmentCount}
                             autocomplete="off"
+                            required
                         />
                     </div>
                 </div>
@@ -63,9 +66,11 @@ function Form() {
                         <input
                             id="interest-rate"
                             type="number"
+                            min="0.0001"
                             onChange={formik.handleChange}
                             placeholder={formik.values.interestRate}
                             autocomplete="off"
+                            required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
                     </div>
@@ -78,8 +83,9 @@ function Form() {
                         <select
                             id="payment"
                             onChange={formik.handleChange}
+                            required
                         >
-                            <option value="select" selected disabled hidden>Seçiniz</option>
+                            <option label="Seçiniz" selected disabled hidden>Seçiniz</option>
                             <option value="weekly">Haftalık</option>
                             <option value="monthly">Aylık</option>
                             <option value="yearly">Yıllık</option>
@@ -94,6 +100,7 @@ function Form() {
                         <input
                             id="taxBsmv"
                             type="number"
+                            min="0.0001"
                             onChange={formik.handleChange}
                             placeholder={formik.values.taxBsmv}
                             autocomplete="off"
@@ -109,6 +116,7 @@ function Form() {
                         <input
                             id="taxKkdf"
                             type="number"
+                            min="0.0001"
                             onChange={formik.handleChange}
                             placeholder={formik.values.taxKkdf}
                             autocomplete="off"

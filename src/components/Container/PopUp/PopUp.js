@@ -4,7 +4,7 @@ import FormContext from '../../../context/FormContext'
 
 function PopUp() {
     const { formValues } = useContext(FormContext)
-    console.log(formValues)
+    // console.log(formValues)
     // useEffect(() => {
     //     console.log(formValues)
     // }, [formValues])
