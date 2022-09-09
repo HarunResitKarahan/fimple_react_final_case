@@ -27,11 +27,11 @@ function Form() {
             <form onSubmit={formik.handleSubmit} autocomplete="off">
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="credit-amount">Kredi Tutarı: </label>
+                        <label htmlFor="creditAmount">Kredi Tutarı: </label>
                     </div>
                     <div className='input'>
                         <input
-                            id="credit-amount"
+                            id="creditAmount"
                             type="number"
                             min="1"
                             onChange={formik.handleChange}
@@ -45,11 +45,11 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="installment-count">Taksit Sayısı</label>
+                        <label htmlFor="installmentCount">Taksit Sayısı</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="installment-count"
+                            id="installmentCount"
                             type="number"
                             onChange={formik.handleChange}
                             placeholder={formik.values.installmentCount}
@@ -60,11 +60,11 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="interest-rate">Kâr oranı</label>
+                        <label htmlFor="interestRate">Kâr oranı</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="interest-rate"
+                            id="interestRate"
                             type="number"
                             onChange={formik.handleChange}
                             placeholder={formik.values.interestRate}
