@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { useFormik } from 'formik';
 import "./Form.css"
 import PopUpContext from "../../../context/PopUpContext"
@@ -66,7 +66,6 @@ function Form() {
                         <input
                             id="interest-rate"
                             type="number"
-                            min="0.0001"
                             onChange={formik.handleChange}
                             placeholder={formik.values.interestRate}
                             autocomplete="off"
@@ -85,7 +84,7 @@ function Form() {
                             onChange={formik.handleChange}
                             required
                         >
-                            <option label="Seçiniz" selected disabled hidden>Seçiniz</option>
+                            <option label="Seçiniz" value="" selected disabled hidden>Seçiniz</option>
                             <option value="weekly">Haftalık</option>
                             <option value="monthly">Aylık</option>
                             <option value="yearly">Yıllık</option>
@@ -100,10 +99,10 @@ function Form() {
                         <input
                             id="taxBsmv"
                             type="number"
-                            min="0.0001"
                             onChange={formik.handleChange}
                             placeholder={formik.values.taxBsmv}
                             autocomplete="off"
+                            required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
                     </div>
@@ -116,10 +115,10 @@ function Form() {
                         <input
                             id="taxKkdf"
                             type="number"
-                            min="0.0001"
                             onChange={formik.handleChange}
                             placeholder={formik.values.taxKkdf}
                             autocomplete="off"
+                            required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
                     </div>
