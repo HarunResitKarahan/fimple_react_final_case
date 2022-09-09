@@ -22,9 +22,10 @@
 }
 
 .container .calculate-container .container-items {
-    width: 550px;
+    max-width: 550px;
     height: fit-content;
     margin: auto;
+    padding: 5px;
 }
 
 .container .calculate-container .container-items .calculate-header {
