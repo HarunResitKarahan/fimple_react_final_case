@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import "./PopUp.css"
 import FormContext from '../../../context/FormContext'
 import { BsXSquare } from "react-icons/bs";
@@ -17,6 +17,7 @@ function PopUp() {
     const payment = Pv * ((Rate * ((1 + Rate) ** Nper)) / ((((1 + Rate) ** Nper) - 1)))
     const profit = (formValues.creditAmount * (formValues.interestRate / 100))
     const mainMoney = payment - taxBsmv - taxKkdf - profit
+    const [unpaidMainMoney, setUnpaidMainMoney] = useState(Pv - mainMoney)
     // console.log(formValues)
     // useEffect(() => {
     //     console.log(formValues)
@@ -50,7 +51,7 @@ function PopUp() {
                                     <td>{i + 1}</td>
                                     <td>{Number(payment.toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{Number(mainMoney.toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
-                                    <td>{formValues.interestRate} ₺</td>
+                                    <td>{Number(Number(unpaidMainMoney).toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{Number(profit.toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{Number((taxKkdf.toFixed(2))).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{Number((taxBsmv.toFixed(2))).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
