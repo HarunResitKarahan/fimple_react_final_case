@@ -9,7 +9,7 @@ function PopUp() {
     //     console.log(formValues)
     // }, [formValues])
     return (
-        <div>PopUp</div>
+        <div className='popUp'>{JSON.stringify(formValues, null, 2)}</div>
     )
 }
 
