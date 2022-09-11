@@ -97,11 +97,11 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="taxBsmv">Vergi oranı (Bsmv)</label>
+                        <label htmlFor="taxKkdf">Vergi oranı (Kkdf)</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="taxBsmv"
+                            id="taxKkdf"
                             type="number"
                             min={0}
                             step={0.0001}
@@ -115,11 +115,11 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="taxKkdf">Vergi oranı (Kkdf)</label>
+                        <label htmlFor="taxBsmv">Vergi oranı (Bsmv)</label>
                     </div>
                     <div className='input'>
                         <input
-                            id="taxKkdf"
+                            id="taxBsmv"
                             type="number"
                             min={0}
                             step={0.0001}
