@@ -117,7 +117,7 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="taxKkdf">Vergi oranı (Kkdf)</label>
+                        <label htmlFor="taxKkdf">Vergi oranı (KKDF)</label>
                     </div>
                     <div className='input'>
                         <input
@@ -136,7 +136,7 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="taxBsmv">Vergi oranı (Bsmv)</label>
+                        <label htmlFor="taxBsmv">Vergi oranı (BSVM)</label>
                     </div>
                     <div className='input'>
                         <input
