@@ -102,7 +102,7 @@ function PopUp() {
                     </table>
                 </div>
             </div>
-            {JSON.stringify(formValues, null, 2)}
+            {/* {JSON.stringify(formValues, null, 2)} */}
         </div>
     )
 }
