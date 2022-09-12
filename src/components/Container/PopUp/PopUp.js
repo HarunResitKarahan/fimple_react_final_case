@@ -8,7 +8,7 @@ import PopUpContext from "../../../context/PopUpContext"
 function PopUp() {
     const { formValues } = useContext(FormContext)
     const { setShowPupUp } = useContext(PopUpContext)
-    const headers = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
+    const tableHeaders = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
     let By = 1
     if (formValues.interestRateTimeInterval !== formValues.payment) {
         if (formValues.interestRateTimeInterval === "Haftalık" && formValues.payment === "Aylık") {
@@ -79,7 +79,7 @@ function PopUp() {
                     <table>
                         <thead>
                             <tr>
-                                {headers.map((item, index) => (
+                                {tableHeaders.map((item, index) => (
                                     <th key={index}>{item}</th>
                                 ))}
                             </tr>
@@ -102,6 +102,7 @@ function PopUp() {
                     </table>
                 </div>
             </div>
+            <span style={{ fontSize: "12px", color: "#444343" }}>*Ödeme Planı {formValues.payment} Olarak Hesaplanmıştır.</span>
             {/* {JSON.stringify(formValues, null, 2)} */}
         </div>
     )

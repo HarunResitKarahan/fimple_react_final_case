@@ -13,9 +13,10 @@
     color: #f77c34;
 } */
 
-/* .popUp .popUpContainer {
+.popUp .popUpContainer {
+    margin-bottom: 10px;
+}
 
-} */
 .popUp .popUpContainer .containerHeader {
     border-bottom: 3px solid #f77c348a;
 }
