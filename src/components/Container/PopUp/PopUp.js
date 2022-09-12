@@ -9,16 +9,32 @@ function PopUp() {
     const { formValues } = useContext(FormContext)
     const { setShowPupUp } = useContext(PopUpContext)
     const headers = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
-    let taxBsmv = ((formValues.taxBsmv * formValues.creditAmount) / 100) / 4
-    let taxKkdf = ((formValues.taxKkdf * formValues.creditAmount) / 100) / 4
-    const Rate = ((formValues.interestRate / 100) + (formValues.taxBsmv / 100) + (formValues.taxKkdf / 100)) / 4
+    let By = 1
+    if (formValues.interestRateTimeInterval !== formValues.payment) {
+        if (formValues.interestRateTimeInterval === "Haftalık" && formValues.payment === "Aylık") {
+            By = 1 / 4
+        } else if (formValues.interestRateTimeInterval === "Haftalık" && formValues.payment === "Yıllık") {
+            By = 1 / 52
+        } else if (formValues.interestRateTimeInterval === "Aylık" && formValues.payment === "Haftalık") {
+            By = 4
+        } else if (formValues.interestRateTimeInterval === "Aylık" && formValues.payment === "Yıllık") {
+            By = 1 / 12
+        } else if (formValues.interestRateTimeInterval === "Yıllık" && formValues.payment === "Haftalık") {
+            By = 52
+        } else if (formValues.interestRateTimeInterval === "Yıllık" && formValues.payment === "Aylık") {
+            By = 12
+        }
+    }
+    let taxBsmv = ((formValues.taxBsmv * formValues.creditAmount) / 100) / By
+    let taxKkdf = ((formValues.taxKkdf * formValues.creditAmount) / 100) / By
+    const Rate = ((formValues.interestRate / 100) + (formValues.taxBsmv / 100) + (formValues.taxKkdf / 100)) / By
     const Nper = formValues.installmentCount
     let Pv = formValues.creditAmount
     const interestRate = (formValues.interestRate / 100)
 
     // const payment = Pv * ((Rate * ((1 + Rate) ** Nper)) / ((((1 + Rate) ** Nper) - 1)))
     const payment = (Rate * Pv) / (1 - (1 + Rate) ** (-Nper))
-    let profit = (formValues.creditAmount * ((formValues.interestRate / 4) / 100))
+    let profit = (formValues.creditAmount * ((formValues.interestRate / By) / 100))
     const tableValues = {
         'mainMoney': [],
         'unpaidMainMoney': [],
@@ -31,13 +47,13 @@ function PopUp() {
     for (let i = 0; i < formValues.installmentCount; i++) {
         tableValues.mainMoney.push(Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit))
         tableValues['unpaidMainMoney'].push(Number(Pv) - (Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit)))
-        tableValues['profit'].push((Pv * (interestRate / 4)))
+        tableValues['profit'].push((Pv * (interestRate / By)))
         tableValues['taxKkdf'].push(taxKkdf)
         tableValues['taxBsmv'].push(taxBsmv)
         Pv = Number(tableValues.unpaidMainMoney[i])
-        taxBsmv = ((formValues.taxBsmv / 4) * Number(tableValues.unpaidMainMoney[i])) / 100
-        taxKkdf = ((formValues.taxKkdf / 4) * Number(tableValues.unpaidMainMoney[i])) / 100
-        profit = (Number(tableValues.unpaidMainMoney[i]) * ((formValues.interestRate / 4) / 100))
+        taxBsmv = ((formValues.taxBsmv / By) * Number(tableValues.unpaidMainMoney[i])) / 100
+        taxKkdf = ((formValues.taxKkdf / By) * Number(tableValues.unpaidMainMoney[i])) / 100
+        profit = (Number(tableValues.unpaidMainMoney[i]) * ((formValues.interestRate / By) / 100))
     }
     // console.log(tableValues)
     // const [unpaidMainMoney, setUnpaidMainMoney] = useState(Number(Pv) - Number(mainMoney))
@@ -86,7 +102,7 @@ function PopUp() {
                     </table>
                 </div>
             </div>
-            {/* {JSON.stringify(formValues, null, 2)} */}
+            {JSON.stringify(formValues, null, 2)}
         </div>
     )
 }

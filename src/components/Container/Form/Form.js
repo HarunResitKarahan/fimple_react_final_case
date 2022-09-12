@@ -13,6 +13,7 @@ function Form() {
             installmentCount: 1,
             interestRate: 0,
             payment: '',
+            interestRateTimeInterval: '',
             taxBsmv: 0,
             taxKkdf: 0,
         },
@@ -45,6 +46,24 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
+                        <label htmlFor="payment">Taksit Aralığı</label>
+                    </div>
+                    <div className='input'>
+                        <select
+                            id="payment"
+                            onChange={formik.handleChange}
+                            defaultValue={""}
+                            required
+                        >
+                            <option label="Seçiniz" value="" disabled hidden>Seçiniz</option>
+                            <option value="Haftalık">Haftalık</option>
+                            <option value="Aylık">Aylık</option>
+                            <option value="Yıllık">Yıllık</option>
+                        </select>
+                    </div>
+                </div>
+                <div className='form-items'>
+                    <div className='label'>
                         <label htmlFor="installmentCount">Taksit Sayısı</label>
                     </div>
                     <div className='input'>
@@ -61,7 +80,25 @@ function Form() {
                 </div>
                 <div className='form-items'>
                     <div className='label'>
-                        <label htmlFor="interestRate">Kâr oranı</label>
+                        <label htmlFor="interestRateTimeInterval">Kar Oranı Birimi</label>
+                    </div>
+                    <div className='input'>
+                        <select
+                            id="interestRateTimeInterval"
+                            onChange={formik.handleChange}
+                            defaultValue={""}
+                            required
+                        >
+                            <option label="Seçiniz" value="" disabled hidden>Seçiniz</option>
+                            <option value="Haftalık">Haftalık</option>
+                            <option value="Aylık">Aylık</option>
+                            <option value="Yıllık">Yıllık</option>
+                        </select>
+                    </div>
+                </div>
+                <div className='form-items'>
+                    <div className='label'>
+                        <label htmlFor="interestRate">Kâr Oranı</label>
                     </div>
                     <div className='input'>
                         <input
@@ -75,24 +112,6 @@ function Form() {
                             required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>%</span>
-                    </div>
-                </div>
-                <div className='form-items'>
-                    <div className='label'>
-                        <label htmlFor="payment">Taksit aralığı</label>
-                    </div>
-                    <div className='input'>
-                        <select
-                            id="payment"
-                            onChange={formik.handleChange}
-                            defaultValue={""}
-                            required
-                        >
-                            <option label="Seçiniz" value="" disabled hidden>Seçiniz</option>
-                            <option value="Haftalık">Haftalık</option>
-                            <option value="Aylık">Aylık</option>
-                            <option value="Yıllık">Yıllık</option>
-                        </select>
                     </div>
                 </div>
                 <div className='form-items'>
