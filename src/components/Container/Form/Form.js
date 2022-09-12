@@ -105,6 +105,7 @@ function Form() {
                             id="interestRate"
                             type="number"
                             min={0}
+                            max={100 - formik.values.taxBsmv - formik.values.taxKkdf}
                             step={0.0001}
                             onChange={formik.handleChange}
                             placeholder={0}
@@ -123,6 +124,7 @@ function Form() {
                             id="taxKkdf"
                             type="number"
                             min={0}
+                            max={100 - formik.values.interestRate - formik.values.taxBsmv}
                             step={0.0001}
                             onChange={formik.handleChange}
                             placeholder={0}
@@ -141,6 +143,7 @@ function Form() {
                             id="taxBsmv"
                             type="number"
                             min={0}
+                            max={100 - formik.values.interestRate - formik.values.taxBsmv}
                             step={0.0001}
                             onChange={formik.handleChange}
                             placeholder={0}
