@@ -23,6 +23,7 @@ function Form() {
             setFormValues(values)
         },
     });
+
     return (
         <>
             <form onSubmit={formik.handleSubmit} autoComplete="off">
@@ -38,7 +39,7 @@ function Form() {
                             onChange={formik.handleChange}
                             placeholder={0}
                             // value={formik.values.creditAmount}
-                            autoComplete="nope"
+                            autoComplete="off"
                             required
                         />
                         <span style={{ position: "absolute", color: '#818181', right: '12px' }}>₺</span>
