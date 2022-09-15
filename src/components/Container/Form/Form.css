@@ -72,6 +72,10 @@ select:focus {
     outline: none;
 }
 
+input:focus {
+    outline: 0.2px solid #e9b394;
+}
+
 option {
     width: 100%;
     font-size: 14px;

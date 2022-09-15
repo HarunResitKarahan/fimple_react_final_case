@@ -9,6 +9,7 @@ function Form() {
     const { setFormValues } = useContext(FormContext)
     const formik = useFormik({
         initialValues: {
+            interestType: '',
             creditAmount: 0,
             installmentCount: 1,
             interestRate: 0,
@@ -27,6 +28,23 @@ function Form() {
     return (
         <>
             <form onSubmit={formik.handleSubmit} autoComplete="off">
+                <div className='form-items'>
+                    <div className='label'>
+                        <label htmlFor="interestType">Faiz Tipi</label>
+                    </div>
+                    <div className='input'>
+                        <select
+                            id="interestType"
+                            onChange={formik.handleChange}
+                            defaultValue={""}
+                            required
+                        >
+                            <option label="Seçiniz" value="" disabled hidden>Seçiniz</option>
+                            <option value="BileşikFaiz">Bileşik Faiz</option>
+                            <option value="BasitFaiz">Basit Faiz</option>
+                        </select>
+                    </div>
+                </div>
                 <div className='form-items'>
                     <div className='label'>
                         <label htmlFor="creditAmount">Kredi Tutarı: </label>
