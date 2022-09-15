@@ -65,7 +65,10 @@ function PopUp(props, ref) {
     // }, [])
     return (
         <div className='popUp'>
-            <span className='popUpExit' onClick={() => { setShowPupUp(false) }}>
+            <span className='popUpExit' onClick={() => {
+                setShowPupUp(false)
+                setPopUpState(false)
+            }}>
                 <IconContext.Provider value={{ color: "#f77c34", className: "global-class-name", size: "27px" }}>
                     <div>
                         <BsXSquare />
