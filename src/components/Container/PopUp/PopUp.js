@@ -1,13 +1,20 @@
-import { useContext } from 'react'
+import { useContext, forwardRef, useImperativeHandle, useState } from 'react'
 import "./PopUp.css"
 import FormContext from '../../../context/FormContext'
 import { BsXSquare } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import PopUpContext from "../../../context/PopUpContext"
 
-function PopUp() {
+function PopUp(props, ref) {
     const { formValues } = useContext(FormContext)
     const { setShowPupUp } = useContext(PopUpContext)
+    const [popUpState, setPopUpState] = useState(false)
+
+    useImperativeHandle(ref, () => ({
+        openModal: () => setPopUpState(true)
+    }));
+    if (!popUpState) return null;
+
     const tableHeaders = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
     let By = 1
     if (formValues.interestRateTimeInterval !== formValues.payment) {
@@ -42,8 +49,6 @@ function PopUp() {
         'taxKkdf': [],
         'taxBsmv': []
     }
-    // console.log(payment)
-    // let tempAmount = Pv
     for (let i = 0; i < formValues.installmentCount; i++) {
         tableValues.mainMoney.push(Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit))
         tableValues['unpaidMainMoney'].push(Number(Pv) - (Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit)))
@@ -55,10 +60,6 @@ function PopUp() {
         taxKkdf = ((formValues.taxKkdf / By) * Number(tableValues.unpaidMainMoney[i])) / 100
         profit = (Number(tableValues.unpaidMainMoney[i]) * ((formValues.interestRate / By) / 100))
     }
-    // console.log(tableValues)
-    // const [unpaidMainMoney, setUnpaidMainMoney] = useState(Number(Pv) - Number(mainMoney))
-    // console.log(Pv - mainMoney)
-    // console.log(formValues)
     // useEffect(() => {
     //     // console.log(tableValues)
     // }, [])
@@ -108,4 +109,4 @@ function PopUp() {
     )
 }
 
-export default PopUp
+export default forwardRef(PopUp) 

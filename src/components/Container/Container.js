@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import "./Container.css"
 import Form from './Form/Form'
 import PopUp from './PopUp/PopUp'
@@ -8,6 +8,11 @@ import PopUpContext from "../../context/PopUpContext"
 
 function Container() {
   const { showPopUp } = useContext(PopUpContext)
+  const modelRef = useRef()
+  if (showPopUp === true) {
+    modelRef.current.openModal()
+  }
+
   return (
     <div className='container'>
       <div className='calculate-container'>
@@ -29,7 +34,7 @@ function Container() {
         style={showPopUp ? { display: "flex", width: "100%", height: "100%", backgroundColor: "#fff", position: "absolute", transition: "all 0.7s ease", left: "0", top: "0" }
           : { display: "flex", width: "100%", height: "100%", backgroundColor: "#fff", position: "absolute", left: "-9999px", top: "0", transition: "all 1.5s ease" }
         }>
-        <PopUp />
+        <PopUp ref={modelRef} />
       </div>
     </div>
   )
