@@ -9,6 +9,7 @@ function PopUp(props, ref) {
     const { formValues } = useContext(FormContext)
     const { setShowPupUp } = useContext(PopUpContext)
     const [popUpState, setPopUpState] = useState(false)
+    let tableValues = {}
 
     useImperativeHandle(ref, () => ({
         openModal: () => setPopUpState(true)
@@ -32,33 +33,41 @@ function PopUp(props, ref) {
             By = 12
         }
     }
-    let taxBsmv = ((formValues.taxBsmv * formValues.creditAmount) / 100) / By
-    let taxKkdf = ((formValues.taxKkdf * formValues.creditAmount) / 100) / By
-    const Rate = ((formValues.interestRate / 100) + (formValues.taxBsmv / 100) + (formValues.taxKkdf / 100)) / By
-    const Nper = formValues.installmentCount
-    let Pv = formValues.creditAmount
-    const interestRate = (formValues.interestRate / 100)
-
-    // const payment = Pv * ((Rate * ((1 + Rate) ** Nper)) / ((((1 + Rate) ** Nper) - 1)))
-    const payment = (Rate * Pv) / (1 - (1 + Rate) ** (-Nper))
-    let profit = (formValues.creditAmount * ((formValues.interestRate / By) / 100))
-    const tableValues = {
-        'mainMoney': [],
-        'unpaidMainMoney': [],
-        'profit': [],
-        'taxKkdf': [],
-        'taxBsmv': []
+    const calculateCompoundInterest = () => {
+        const interestRate = (formValues.interestRate / 100)
+        let profit = (formValues.creditAmount * ((formValues.interestRate / By) / 100))
+        let taxBsmv = (((formValues.taxBsmv) * profit) / 100) / By
+        let taxKkdf = (((formValues.taxKkdf) * profit) / 100) / By
+        const Rate = ((formValues.interestRate / 100) + (((taxBsmv * 100) / formValues.creditAmount) / 100) + (((taxKkdf * 100) / formValues.creditAmount) / 100)) / By
+        // const Rate = 0.0285,
+        console.log(Rate)
+        const Nper = formValues.installmentCount
+        let Pv = formValues.creditAmount
+        // const payment = Pv * ((Rate * ((1 + Rate) ** Nper)) / ((((1 + Rate) ** Nper) - 1)))
+        const payment = (Rate * Pv) / (1 - (1 + Rate) ** (-Nper))
+        const tableValues = {
+            'payment': payment,
+            'mainMoney': [],
+            'unpaidMainMoney': [],
+            'profit': [],
+            'taxKkdf': [],
+            'taxBsmv': []
+        }
+        for (let i = 0; i < formValues.installmentCount; i++) {
+            tableValues.mainMoney.push(Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit))
+            tableValues['unpaidMainMoney'].push(Number(Pv) - (Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit)))
+            tableValues['profit'].push((Pv * (interestRate / By)))
+            tableValues['taxKkdf'].push(taxKkdf)
+            tableValues['taxBsmv'].push(taxBsmv)
+            Pv = Number(tableValues.unpaidMainMoney[i])
+            profit = (Number(tableValues.unpaidMainMoney[i]) * ((formValues.interestRate / By) / 100))
+            taxBsmv = (((formValues.taxBsmv * profit) / 100) / By)
+            taxKkdf = (((formValues.taxKkdf * profit) / 100) / By)
+        }
+        return tableValues
     }
-    for (let i = 0; i < formValues.installmentCount; i++) {
-        tableValues.mainMoney.push(Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit))
-        tableValues['unpaidMainMoney'].push(Number(Pv) - (Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit)))
-        tableValues['profit'].push((Pv * (interestRate / By)))
-        tableValues['taxKkdf'].push(taxKkdf)
-        tableValues['taxBsmv'].push(taxBsmv)
-        Pv = Number(tableValues.unpaidMainMoney[i])
-        taxBsmv = ((formValues.taxBsmv / By) * Number(tableValues.unpaidMainMoney[i])) / 100
-        taxKkdf = ((formValues.taxKkdf / By) * Number(tableValues.unpaidMainMoney[i])) / 100
-        profit = (Number(tableValues.unpaidMainMoney[i]) * ((formValues.interestRate / By) / 100))
+    if (formValues.interestType === "BileşikFaiz") {
+        tableValues = calculateCompoundInterest()
     }
     // useEffect(() => {
     //     // console.log(tableValues)
@@ -93,7 +102,7 @@ function PopUp(props, ref) {
                             {[...Array(tableValues.mainMoney.length)].map((x, i) =>
                                 <tr key={i}>
                                     <td>{i + 1}</td>
-                                    <td>{Number(payment.toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
+                                    <td>{Number(tableValues.payment.toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{Number(tableValues.mainMoney[i].toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{Number(tableValues.unpaidMainMoney[i].toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                     <td>{Number(tableValues.profit[i].toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
@@ -107,7 +116,7 @@ function PopUp(props, ref) {
                 </div>
             </div>
             <span style={{ fontSize: "12px", color: "#444343" }}>*Ödeme Planı {formValues.payment} Olarak Hesaplanmıştır.</span>
-            {/* {JSON.stringify(formValues, null, 2)} */}
+            {JSON.stringify(formValues, null, 2)}
         </div>
     )
 }
