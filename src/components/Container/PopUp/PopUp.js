@@ -107,7 +107,7 @@ function PopUp(props, ref) {
                 </div>
             </div>
             <span style={{ fontSize: "12px", color: "#444343" }}>*Ödeme Planı {formValues.payment} Olarak Hesaplanmıştır.</span>
-            {JSON.stringify(formValues, null, 2)}
+            {/* {JSON.stringify(formValues, null, 2)} */}
         </div>
     )
 }
