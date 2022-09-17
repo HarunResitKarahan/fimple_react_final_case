@@ -35,16 +35,16 @@ function PopUp(props, ref) {
             }
         }
         const interestRate = (formValues.interestRate / 100) / By
-        let profit = (formValues.creditAmount * (formValues.interestRate / 100))
+        let profit = (formValues.creditAmount * (interestRate))
         let taxBsmv = (((formValues.taxBsmv) * profit) / 100)
         let taxKkdf = (((formValues.taxKkdf) * profit) / 100)
-        const Rate = ((formValues.interestRate / 100) + (((taxBsmv * 100) / formValues.creditAmount) / 100) + (((taxKkdf * 100) / formValues.creditAmount) / 100))
+        const Rate = ((interestRate) + (((taxBsmv * 100) / formValues.creditAmount) / 100) + (((taxKkdf * 100) / formValues.creditAmount) / 100))
         // const Rate = 0.0285,
-        console.log(formValues.interestRate)
-        console.log(((taxKkdf * 100) / formValues.creditAmount) / 100)
-        console.log(((taxBsmv * 100) / formValues.creditAmount) / 100)
-        console.log(By)
-        console.log(Rate)
+        // console.log(interestRate)
+        // console.log(((taxKkdf * 100) / formValues.creditAmount) / 100)
+        // console.log(((taxBsmv * 100) / formValues.creditAmount) / 100)
+        // console.log(By)
+        // console.log(Rate)
         // console.log(((formValues.interestRate / 100) + (((taxBsmv * 100) / formValues.creditAmount) / 100) + (((taxKkdf * 100) / formValues.creditAmount) / 100)))
         const Nper = formValues.installmentCount
         let Pv = formValues.creditAmount
@@ -66,7 +66,7 @@ function PopUp(props, ref) {
             tableValues['taxKkdf'].push(taxKkdf)
             tableValues['taxBsmv'].push(taxBsmv)
             Pv = Number(tableValues.unpaidMainMoney[i])
-            profit = (Number(tableValues.unpaidMainMoney[i]) * (formValues.interestRate / 100))
+            profit = (Number(tableValues.unpaidMainMoney[i]) * (interestRate))
             taxBsmv = ((formValues.taxBsmv * profit) / 100)
             taxKkdf = ((formValues.taxKkdf * profit) / 100)
         }
