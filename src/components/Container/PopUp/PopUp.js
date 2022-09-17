@@ -75,11 +75,11 @@ function PopUp(props, ref) {
     const calculateSimpleInterest = () => {
         const interestRate = (formValues.interestRate / 100) / By
         const simpleInterest = formValues.creditAmount * interestRate * formValues.installmentCount
-        let profit = simpleInterest
+        let profit = simpleInterest / formValues.installmentCount
         let taxBsmv = (((formValues.taxBsmv) * profit) / 100)
         let taxKkdf = (((formValues.taxKkdf) * profit) / 100)
         let Pv = formValues.creditAmount
-        const payment = (simpleInterest + formValues.creditAmount + taxBsmv + taxKkdf) / formValues.installmentCount
+        const payment = (profit + formValues.creditAmount / formValues.installmentCount + taxBsmv + taxKkdf)
         const tableValues = {
             'payment': payment,
             'mainMoney': [],
@@ -91,11 +91,11 @@ function PopUp(props, ref) {
         for (let i = 0; i < formValues.installmentCount; i++) {
             tableValues.mainMoney.push(formValues.creditAmount / formValues.installmentCount)
             tableValues['unpaidMainMoney'].push(Pv - tableValues.mainMoney[i])
-            tableValues['profit'].push(simpleInterest / formValues.installmentCount)
+            tableValues['profit'].push(profit)
             tableValues['taxKkdf'].push(taxKkdf)
             tableValues['taxBsmv'].push(taxBsmv)
             Pv = Number(tableValues.unpaidMainMoney[i])
-            profit = (Number(tableValues.unpaidMainMoney[i]) * (interestRate))
+            // profit = (Number(tableValues.unpaidMainMoney[i]) * (interestRate))
             taxBsmv = ((formValues.taxBsmv * profit) / 100)
             taxKkdf = ((formValues.taxKkdf * profit) / 100)
         }
