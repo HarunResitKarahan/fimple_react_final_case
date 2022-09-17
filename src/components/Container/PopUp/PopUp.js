@@ -17,23 +17,23 @@ function PopUp(props, ref) {
     if (!popUpState) return null;
 
     const tableHeaders = ['Taksit No', 'Taksit Tutarı', 'Ana Para', 'Kalan Ana Para', 'Kâr Tutarı', 'KKDF', 'BSMV']
-    const calculateCompoundInterest = () => {
-        let By = 1
-        if (formValues.interestRateTimeInterval !== formValues.payment) {
-            if (formValues.interestRateTimeInterval === "Haftalık" && formValues.payment === "Aylık") {
-                By = 1 / 4
-            } else if (formValues.interestRateTimeInterval === "Haftalık" && formValues.payment === "Yıllık") {
-                By = 1 / 52
-            } else if (formValues.interestRateTimeInterval === "Aylık" && formValues.payment === "Haftalık") {
-                By = 4
-            } else if (formValues.interestRateTimeInterval === "Aylık" && formValues.payment === "Yıllık") {
-                By = 1 / 12
-            } else if (formValues.interestRateTimeInterval === "Yıllık" && formValues.payment === "Haftalık") {
-                By = 52
-            } else if (formValues.interestRateTimeInterval === "Yıllık" && formValues.payment === "Aylık") {
-                By = 12
-            }
+    let By = 1
+    if (formValues.interestRateTimeInterval !== formValues.payment) {
+        if (formValues.interestRateTimeInterval === "Haftalık" && formValues.payment === "Aylık") {
+            By = 1 / 4
+        } else if (formValues.interestRateTimeInterval === "Haftalık" && formValues.payment === "Yıllık") {
+            By = 1 / 52
+        } else if (formValues.interestRateTimeInterval === "Aylık" && formValues.payment === "Haftalık") {
+            By = 4
+        } else if (formValues.interestRateTimeInterval === "Aylık" && formValues.payment === "Yıllık") {
+            By = 1 / 12
+        } else if (formValues.interestRateTimeInterval === "Yıllık" && formValues.payment === "Haftalık") {
+            By = 52
+        } else if (formValues.interestRateTimeInterval === "Yıllık" && formValues.payment === "Aylık") {
+            By = 12
         }
+    }
+    const calculateCompoundInterest = () => {
         const interestRate = (formValues.interestRate / 100) / By
         let profit = (formValues.creditAmount * (interestRate))
         let taxBsmv = (((formValues.taxBsmv) * profit) / 100)
@@ -74,6 +74,19 @@ function PopUp(props, ref) {
     }
     if (formValues.interestType === "BileşikFaiz") {
         tableValues = calculateCompoundInterest()
+    } else if (formValues.interestType === "BasitFaiz") {
+        const tableValues = {
+            'payment': 0,
+            'mainMoney': [],
+            'unpaidMainMoney': [],
+            'profit': [],
+            'taxKkdf': [],
+            'taxBsmv': []
+        }
+        const interestRate = (formValues.interestRate / 100) / By
+        const simpleInterest = formValues.creditAmount * interestRate * formValues.installmentCount
+        console.log(`Basit Faiz: ${simpleInterest}`)
+        console.log(`Total Amount: ${simpleInterest + formValues.creditAmount}`)
     }
     // useEffect(() => {
     //     // console.log(tableValues)
@@ -104,7 +117,7 @@ function PopUp(props, ref) {
                             </tr>
                         </thead>
 
-                        <tbody>
+                        {/* <tbody>
                             {[...Array(tableValues.mainMoney.length)].map((x, i) =>
                                 <tr key={i}>
                                     <td>{i + 1}</td>
@@ -116,7 +129,7 @@ function PopUp(props, ref) {
                                     <td>{Number(tableValues.taxBsmv[i].toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                 </tr>
                             )}
-                        </tbody>
+                        </tbody> */}
 
                     </table>
                 </div>
