@@ -72,21 +72,41 @@ function PopUp(props, ref) {
         }
         return tableValues
     }
-    if (formValues.interestType === "BileşikFaiz") {
-        tableValues = calculateCompoundInterest()
-    } else if (formValues.interestType === "BasitFaiz") {
+    const calculateSimpleInterest = () => {
+        const interestRate = (formValues.interestRate / 100) / By
+        const simpleInterest = formValues.creditAmount * interestRate * formValues.installmentCount
+        let profit = simpleInterest
+        let taxBsmv = (((formValues.taxBsmv) * profit) / 100)
+        let taxKkdf = (((formValues.taxKkdf) * profit) / 100)
+        let Pv = formValues.creditAmount
+        const payment = (simpleInterest + formValues.creditAmount + taxBsmv + taxKkdf) / formValues.installmentCount
         const tableValues = {
-            'payment': 0,
+            'payment': payment,
             'mainMoney': [],
             'unpaidMainMoney': [],
             'profit': [],
             'taxKkdf': [],
             'taxBsmv': []
         }
-        const interestRate = (formValues.interestRate / 100) / By
-        const simpleInterest = formValues.creditAmount * interestRate * formValues.installmentCount
-        console.log(`Basit Faiz: ${simpleInterest}`)
-        console.log(`Total Amount: ${simpleInterest + formValues.creditAmount}`)
+        for (let i = 0; i < formValues.installmentCount; i++) {
+            tableValues.mainMoney.push(formValues.creditAmount / formValues.installmentCount)
+            tableValues['unpaidMainMoney'].push(Pv - (Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit)))
+            tableValues['profit'].push(simpleInterest / formValues.installmentCount)
+            tableValues['taxKkdf'].push(taxKkdf)
+            tableValues['taxBsmv'].push(taxBsmv)
+            Pv = Number(tableValues.unpaidMainMoney[i])
+            // profit = (Number(tableValues.unpaidMainMoney[i]) * (interestRate))
+            // taxBsmv = ((formValues.taxBsmv * profit) / 100)
+            // taxKkdf = ((formValues.taxKkdf * profit) / 100)
+        }
+        // console.log(`Basit Faiz: ${simpleInterest}`)
+        // console.log(`Total Amount: ${simpleInterest + formValues.creditAmount}`)
+        return tableValues
+    }
+    if (formValues.interestType === "BileşikFaiz") {
+        tableValues = calculateCompoundInterest()
+    } else if (formValues.interestType === "BasitFaiz") {
+        tableValues = calculateSimpleInterest()
     }
     // useEffect(() => {
     //     // console.log(tableValues)
@@ -117,7 +137,7 @@ function PopUp(props, ref) {
                             </tr>
                         </thead>
 
-                        {/* <tbody>
+                        <tbody>
                             {[...Array(tableValues.mainMoney.length)].map((x, i) =>
                                 <tr key={i}>
                                     <td>{i + 1}</td>
@@ -129,7 +149,7 @@ function PopUp(props, ref) {
                                     <td>{Number(tableValues.taxBsmv[i].toFixed(2)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ₺</td>
                                 </tr>
                             )}
-                        </tbody> */}
+                        </tbody>
 
                     </table>
                 </div>
