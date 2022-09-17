@@ -90,14 +90,14 @@ function PopUp(props, ref) {
         }
         for (let i = 0; i < formValues.installmentCount; i++) {
             tableValues.mainMoney.push(formValues.creditAmount / formValues.installmentCount)
-            tableValues['unpaidMainMoney'].push(Pv - (Number(payment) - Number(taxBsmv) - Number(taxKkdf) - Number(profit)))
+            tableValues['unpaidMainMoney'].push(Pv - tableValues.mainMoney[i])
             tableValues['profit'].push(simpleInterest / formValues.installmentCount)
             tableValues['taxKkdf'].push(taxKkdf)
             tableValues['taxBsmv'].push(taxBsmv)
             Pv = Number(tableValues.unpaidMainMoney[i])
-            // profit = (Number(tableValues.unpaidMainMoney[i]) * (interestRate))
-            // taxBsmv = ((formValues.taxBsmv * profit) / 100)
-            // taxKkdf = ((formValues.taxKkdf * profit) / 100)
+            profit = (Number(tableValues.unpaidMainMoney[i]) * (interestRate))
+            taxBsmv = ((formValues.taxBsmv * profit) / 100)
+            taxKkdf = ((formValues.taxKkdf * profit) / 100)
         }
         // console.log(`Basit Faiz: ${simpleInterest}`)
         // console.log(`Total Amount: ${simpleInterest + formValues.creditAmount}`)
